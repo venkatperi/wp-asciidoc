@@ -1,0 +1,28 @@
+{
+  "name": "wp-asciidoc",
+  "version": "0.1.0",
+  "description": "Publishing to Wordpress using AsciiDoc",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Venkat Peri<venkatperi@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "asciidoc"
+  ],
+  "repository": "https://github.com/venkatperi/wp-asciidoc",
+  "dependencies": {
+    "asciidoctor.js": "^1.5.6-preview.2",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.18.1",
+    "nconf": "^0.8.4",
+    "q": "^1.5.0",
+    "wordpress": "^1.4.0",
+    "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2"
+  }
+}
