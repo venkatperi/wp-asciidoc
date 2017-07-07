@@ -2,6 +2,8 @@
   "name": "wp-asciidoc",
   "version": "0.1.0",
   "description": "Publishing to Wordpress using AsciiDoc",
+  "preferGlobal": true,
+  "bin": "./bin/wpasc",
   "scripts": {
     "test": "mocha"
   },
