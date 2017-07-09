@@ -1,0 +1,128 @@
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:rootdir: .
+:imagesdir: {rootdir}/images
+:toclevels: 2
+:toc:
+:numbered:
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= wpasc
+
+[.address]
+`wpasc` is a command-line tool for publishing rendered `AsciiDoc` posts to `Wordpress`.
+
+== Getting Started
+
+Install with `npm`:
+
+[source, bash]
+$ npm install wpasc -g
+
+Create a config file at `$HOME/.wp-asciidoc`:
+
+```json
+{
+  "sites":{
+    "your-site" : {
+      "connection":{
+        "username":"wordpress username",
+        "password":"wordpress password",
+        "url":"your-site-url"
+      },
+      "dir": "/local/working/dir",
+      "appendAsciiDoc" : {
+        "id":"wp-asciidoc",
+        "style":"display:none; visibility:hidden;",
+        "class":"wp-asciidoc"
+      }
+    }
+  },
+  "default-site": "your-site",
+  "asciidoc":{
+    "icons":"font",
+    "imagesdir":"/images"
+  }
+}
+```
+
+== Usage
+```bash
+usage: wpasc <command> [$1]
+
+Commands:
+  new      create new post
+  list     list posts
+  pull     pull post data
+  content  dump remote post content
+  render   render post and dump HTML locally
+  push     push content to existing post
+  edit     locally edit asciidoc
+
+Options:
+  --help      Show help                                                [boolean]
+  --site, -s                                   [required] [default: "vperi.com"]
+```
+
+=== Local File Structure
+* The base working directory is `sites.your-site.dir` from the config file.
+* Posts are stored under `posts/<postid>`.
+  - `content.adoc`: The post's content in AsciiDoc format.
+  - `post.json`: Metadata about the post (title, excerpt, id).
+
+=== List Posts
+
+```bash
+$ wpasc list [-n number | default all]
+```
+
+```bash
+$ wpasc list -n 10
+634  fs.ReadStream Performance Issues
+520  Node.js Transform Streams Performance
+543  Node.js Stream Performance with Strings
+499  Node.js Stream Performance with Buffer Objects
+436  Node.js Streams Performance
+472  nextTick & setImmediate
+464  Node.js Buffer Allocation Performance
+400  bench-runner
+379  Textual Representation for Classes (Swift)
+372  A Groovy lib for Xcode pbxproj files
+```
+
+=== Create New Post
+```bash
+$ wpasc new --title <title>
+```
+
+Creates a new post with the given title and prints the post's id.
+
+```bash
+$ wpasc new --title "test post"
+664
+```
+
+=== Edit Post Locally
+```bash
+$ wpasc edit <post id>
+```
+Lanuches your favorite editor with the local Asciidoc content of the post.
+
+=== Push Post to WordPress
+```bash
+$ wpasc push <post id>
+```
+
+=== Dump Post's Content from WordPress
+```bash
+$ wpasc content <post id>
+```
+
+=== Render and Dump Post (Does not Update Wordpress)
+```bash
+$ wpasc render <post id>
+```
