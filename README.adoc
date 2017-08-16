@@ -23,7 +23,11 @@ Install with `npm`:
 [source, bash]
 $ npm install wpasc -g
 
-Create a config file at `$HOME/.wp-asciidoc`:
+
+=== Configuration File
+
+Location: `$HOME/.wp-asciidoc`
+
 
 ```json
 {
@@ -50,6 +54,13 @@ Create a config file at `$HOME/.wp-asciidoc`:
 }
 ```
 
+=== Local File Structure
+* The base working directory is `sites.your-site.dir` from the config file.
+* Posts are stored under `posts/<postid>`.
+  - `content.adoc`: The post's content in AsciiDoc format.
+  - `post.json`: Metadata about the post (title, excerpt, id).
+
+
 == Usage
 ```bash
 usage: wpasc <command> [$1]
@@ -65,20 +76,17 @@ Commands:
 
 Options:
   --help      Show help                                                [boolean]
-  --site, -s                                   [required] [default: "vperi.com"]
+  --site, -s                                                          [required] 
 ```
-
-=== Local File Structure
-* The base working directory is `sites.your-site.dir` from the config file.
-* Posts are stored under `posts/<postid>`.
-  - `content.adoc`: The post's content in AsciiDoc format.
-  - `post.json`: Metadata about the post (title, excerpt, id).
 
 === List Posts
 
 ```bash
 $ wpasc list [-n number | default all]
 ```
+
+Lists all posts on WordPress. Use `-n|--number` option to limit listing.
+
 
 ```bash
 $ wpasc list -n 10
@@ -110,12 +118,14 @@ $ wpasc new --title "test post"
 ```bash
 $ wpasc edit <post id>
 ```
-Lanuches your favorite editor with the local Asciidoc content of the post.
+Lanuches your favorite editor with the local Asciidoc content of the post. Environment variable `$EDITOR` must be set.
 
 === Push Post to WordPress
 ```bash
 $ wpasc push <post id>
 ```
+
+Renders the post's content and pushes the resulting HTML to Wordpress. 
 
 === Dump Post's Content from WordPress
 ```bash
@@ -126,3 +136,4 @@ $ wpasc content <post id>
 ```bash
 $ wpasc render <post id>
 ```
+
